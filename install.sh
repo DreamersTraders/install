@@ -2,8 +2,6 @@
 
 # Set variables
 # -----------------------------------
-DREAMBOT_GITHUB_FOLDER_NAME="DreamBot_v2.1"
-DREAMBOT_GITHUB_FILE_NAME="DreamBot_v2.1"
 
 
 # Set functions
@@ -43,21 +41,21 @@ npm install -g pm2 yo@1.8.5 > /dev/null 2>&1
 logMessage "(4/6) Instalando DreamBot"
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-wget -q https://github.com/DreamersTraders/dreambot/releases/download/DB2.1/DreamBot_v2.1.zip -P /opt/
-unzip -o -qq /opt/${DREAMBOT_GITHUB_FILE_NAME}.zip -d /opt/unzip-tmp
+wget -q https://github.com/DreamersTraders/dreambot/releases/download/DBv2.1/dreambot_v2.1.zip -P /opt/
+sudo unzip -o -qq /opt/dreambot_v2.1.zip -d /opt/unzip-tmp
 
 # create folder for the current version.
-sudo mkdir /opt/${DREAMBOT_GITHUB_FILE_NAME} -p
+sudo mkdir /opt/dreambot_v2.1 -p
 
 # Copy only the executables.
-cp /opt/unzip-tmp/dreambot-* /opt/${DREAMBOT_GITHUB_FILE_NAME}
+cp -r /opt/unzip-tmp/* /opt/dreambot_v2.1
 
 # creates a symbolic link to the DREAMBOT folder.
 rm /opt/dreambot > /dev/null 2>&1
-ln -s /opt/${DREAMBOT_GITHUB_FILE_NAME} /opt/dreambot
+ln -s /opt/dreambot_v2.1 /opt/dreambot
 
 # Cleanup
-sudo rm /opt/${DREAMBOT_GITHUB_FILE_NAME}.zip
+sudo rm /opt/dreambot_v2.1.zip
 sudo rm -R /opt/unzip-tmp
 
 # Set rights
@@ -75,7 +73,8 @@ echo "alias dlog='pm2 logs'" >> ~/.bashrc
 echo "alias dstart='pm2 start'" >> ~/.bashrc
 echo "alias dstop='pm2 stop'" >> ~/.bashrc
 echo "alias deditar='sudo nano config.js'" >> ~/.bashrc
-
+echo "alias diniciar='pm2 start dreambot-linux'" >> ~/.bashrc
+echo "alias dmonitor='pm2 monit'" >> ~/.bashrc
 
 
 logMessage "(6/6) Generador de archivos"
